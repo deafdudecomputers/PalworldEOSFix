@@ -49,7 +49,7 @@ Every 60 seconds, the utility verifies the path exists, re-applies the registry 
 
 ## 🚀 How To Use
 
-1.  **Download** or clone this repository.
+1.  **Download** the latest `PalworldEOSFix.exe` from the [Releases](https://github.com/deafdudecomputers/PalworldEOSFix/releases) page.
 2.  **Run as Administrator** (required to modify registry and system shell settings).
 3.  **Keep the window open** while launching Palworld.
 4.  Join multiplayer normally.
@@ -61,13 +61,36 @@ Every 60 seconds, the utility verifies the path exists, re-applies the registry 
 * **Registry Changes:** This modifies Windows registry settings.
 * **Mod Uninstallation:** This **will remove** your Palworld mods and injected files to ensure a clean EOS handshake.
 * **Workflow Impact:** If you rely on redirected Documents for enterprise or NAS workflows, this tool will override those settings while active.
-* **Windows Only:** Designed specifically for Windows environments.
+* **Antivirus:** If Windows blocks it, click **"More Info"** -> **"Run Anyway"** (False positive due to Registry repair).
 
-### What This Does NOT Fix
-* Official EOS server outages
-* General internet connectivity issues
-* Steam "Offline Mode" issues
-* Corrupt save files or game version mismatches
+---
+
+## 🔍 Visual Error Guide (Which fix do I need?)
+
+<details>
+<summary><b>❌ EOS Activation / Login Timeout Errors</b></summary>
+
+<img width="608" height="302" alt="EOS Activation Error" src="https://github.com/user-attachments/assets/b711c8c3-8a22-4f53-ab3e-3f21b89ff3d5" />
+<img width="605" height="309" alt="EOS Login Timeout" src="https://github.com/user-attachments/assets/bb658fd0-e5e2-4b73-9016-cd29301c7b17" />
+
+**The Cause:** This typically means your Documents path was misconfigured. This tool will reset the Documents path to the correct local directory on your behalf.
+</details>
+
+<details>
+<summary><b>❌ Connection Timed Out</b></summary>
+
+<img width="972" height="478" alt="image" src="https://github.com/user-attachments/assets/81622145-0f06-455e-ad9d-e442948aab81" />
+
+**The Cause:** This typically occurs due to outdated mods. Because mods often persist even after a clean uninstallation and reinstallation, they usually require manual removal. This tool will automatically identify and remove all mods on your behalf.
+</details>
+
+<details>
+<summary><b>❌ Pal Crash Reporter</b></summary>
+
+<img width="746" height="600" alt="image" src="https://github.com/user-attachments/assets/439801c1-978e-4f6f-9269-02f1d8f01ba3" />
+
+**The Cause:** Often caused by outdated mods or corrupted saves. If the error persists after using this fix to clear your mods, your save file may be corrupted. Refer to the [Save Cleaning Tool](https://github.com/deafdudecomputers/PalworldSaveTools/releases/latest) for further assistance.
+</details>
 
 ---
 
