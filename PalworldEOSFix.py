@@ -13,6 +13,11 @@ def audit_and_fix_documents_for_eos():
         winreg.CloseKey(key)
         ctypes.windll.shell32.SHGetSetSettings(None,0,0)
         ctypes.windll.shell32.SHChangeNotify(0x08000000,0,None,None)
+    def sync_system_time():
+        try:
+            subprocess.run("w32tm /resync /force",shell=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+            log("System time synchronized via w32tm.")
+        except:log("Failed to sync system time.")
     def cleanup_palworld_mods():
         try:
             hkey=winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1623730")
@@ -51,10 +56,11 @@ def audit_and_fix_documents_for_eos():
             std=os.path.join(os.environ["USERPROFILE"],"Documents")
             if not os.path.exists(std):os.makedirs(std,exist_ok=True)
             set_docs_shell_path("%USERPROFILE%\\Documents")
+            sync_system_time()
             buf=ctypes.create_unicode_buffer(260)
             ctypes.windll.shell32.SHGetFolderPathW(None,5,None,0,buf)
-            log(f"SHELL SECURED: {buf.value}")
-            print(">>> Path secured. All mod folders cleaned. You can now try joining the game.")
+            log(f"SHELL & TIME SECURED: {buf.value}")
+            print(">>> Path & Time secured. Mods cleaned. You can now try joining or hosting.")
         except Exception:
             log(traceback.format_exc())
         time.sleep(60)
