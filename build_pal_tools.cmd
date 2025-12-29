@@ -17,10 +17,10 @@ if not exist pal.ico (
     exit /b
 )
 echo [1/2] Building PalworldEOSFix.exe...
-pyinstaller --clean --onefile --uac-admin --icon=pal.ico PalworldEOSFix.py
+pyinstaller --clean --onefile --noconsole --uac-admin --icon=pal.ico --add-data "pal.ico;." PalworldEOSFix.py
 echo.
 echo [2/2] Building PalworldEOSTest.exe...
-pyinstaller --clean --onefile --uac-admin --icon=pal.ico PalworldEOSTest.py
+pyinstaller --clean --onefile --noconsole --uac-admin --icon=pal.ico --add-data "pal.ico;." PalworldEOSTest.py
 echo.
 echo ========================================
 echo   CLEANING UP TEMPORARY FILES
