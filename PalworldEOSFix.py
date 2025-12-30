@@ -87,9 +87,16 @@ class PalworldFixerGUI(QMainWindow):
             root_mods=os.path.join(path,"Mods")
             if os.path.exists(root_mods):shutil.rmtree(root_mods,ignore_errors=True)
             bin_p=os.path.join(path,"Pal","Binaries","Win64")
-            u4ss,dwm=os.path.join(bin_p,"ue4ss"),os.path.join(bin_p,"dwmapi.dll")
-            if os.path.exists(u4ss):shutil.rmtree(u4ss,ignore_errors=True)
-            if os.path.exists(dwm):os.remove(dwm)
+            legacy_mods=os.path.join(bin_p,"Mods")
+            if os.path.exists(legacy_mods):shutil.rmtree(legacy_mods,ignore_errors=True)
+            u4ss_dir=os.path.join(bin_p,"ue4ss")
+            if os.path.exists(u4ss_dir):shutil.rmtree(u4ss_dir,ignore_errors=True)
+            legacy_targets=[f.lower() for f in ["dwmapi.dll","dxgi.dll","ue4ss.dll","ue4ss-settings.ini","ue4ss.log","member_offsets.ini","vtableoffsets.ini","xinput1_1.dll","xinput1_2.dll","xinput1_3.dll","xinput1_4.dll","xinput9_1_0.dll","readme.md","changelog.md"]]
+            if os.path.exists(bin_p):
+                for item in os.listdir(bin_p):
+                    if item.lower() in legacy_targets:
+                        try:os.remove(os.path.join(bin_p,item))
+                        except:pass
             paks_p=os.path.join(path,"Pal","Content","Paks")
             if os.path.exists(paks_p):
                 for item in os.listdir(paks_p):
@@ -101,7 +108,7 @@ class PalworldFixerGUI(QMainWindow):
             if os.path.exists(app_p):
                 shutil.rmtree(os.path.join(app_p,"Config"),ignore_errors=True)
                 shutil.rmtree(os.path.join(app_p,"Logs"),ignore_errors=True)
-            self.log("Successfully removed mods and cleared configuration cache.")
+            self.log("Successfully removed all mods, injectors, and cleared cache.")
         except:self.log("Could not find the game installation. Is it installed via Steam?")
     def closeEvent(self,event):
         self.kill_external_fixer()
